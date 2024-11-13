@@ -9,15 +9,6 @@ public class Task2 {
             this.left = left;
             this.right = right;
         }
-
-        @Override
-        public String toString() {
-            return "BinaryNode{" +
-                    "value=" + value +
-                    ", left=" + left +
-                    ", right=" + right +
-                    '}';
-        }
     }
 
     public static class BinaryTree {
@@ -50,28 +41,39 @@ public class Task2 {
                                                 null),
                                         new BinaryNode(69, null, null))
                                 )));
-        System.out.println(walkTheTree(tree.root));
+        System.out.println("Number of branches: " + countBranches(tree.root));
     }
 
-    public static BinaryNode walkTheTree(BinaryNode node) {
-        if (getOnlyChild(node) != null) {
-            return getOnlyChild(node);
+    public static int countBranches(BinaryNode node) {
+        if (node == null) {
+            return 0;
         }
-        return null;
+
+        //We check if the node has only one child
+        BinaryNode onlyChild = getOnlyChild(node);
+        if (onlyChild != null) {
+            //Then we check if the only child has exactly one child that is a leaf
+            BinaryNode grandChild = getOnlyChild(onlyChild);
+            if (grandChild != null && grandChild.left == null && grandChild.right == null) {
+                //then this node is part of a branch
+                return 1 + countBranches(onlyChild);
+            }
+        }
+
+        //We recursively check the left and right child nodes
+        return countBranches(node.left) + countBranches(node.right);
     }
 
     public static BinaryNode getOnlyChild(BinaryNode node) {
-        if (node.left == null && node.right == null) {
+        if (node == null) {
             return null;
         }
-        else if (node.left != null && node.right == null) {
+        if (node.left != null && node.right == null) {
             return node.left;
         }
-
-        else {
-            getOnlyChild(node.left);
-            getOnlyChild(node.right);
+        if (node.left == null && node.right != null) {
+            return node.right;
         }
-
+        return null;
     }
 }
