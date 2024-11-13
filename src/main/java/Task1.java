@@ -18,7 +18,9 @@ public class Task1 {
      */
 
     public static void main(String[] args) {
-        System.out.println((dominantWord("The cattle were running back and forth, but there was no wolf to be seen, heard, or smelled, so the shepherd decided to take a little nap in a bed of grass and early summer flowers. Soon he was awakened by a sound he had never heard before.")));
+        System.out.println((dominantWord("The cattle were running back and forth, but there was no wolf to be seen, " +
+                "heard, or smelled, so the shepherd decided to take a little nap in a bed of grass and early summer flowers. " +
+                "Soon he was awakened by a sound he had never heard before.")));
     }
 
     public static String dominantWord(String s) {
@@ -45,7 +47,7 @@ public class Task1 {
 
         //Now we put the words in a HashMap to count each occurrence of a word. We also keep track of the highest count so far.
         //The task does not ask us to consider that more than one word can occur the most times, so we just find one
-        //single word with most occurences.
+        //single word with most occurrences.
         HashMap<String, Integer> uniqueWordCount = new HashMap<>();
         String highestCountWord = "";
 
